@@ -1,28 +1,25 @@
-let imagemCenario;
-let imagemPersonagem;
-let cenario;
-let somDoJogo;
-let personagem;
 
-function preload() {
-  imagemCenario = loadImage('imagens/cenario/floresta.png');
-  imagemPersonagem = loadImage('imagens/personagem/correndo.png');
-  somDoJogo = loadSound('sons/trilha_jogo.mp3');
-}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  cenario = new Cenario(imagemCenario, 3);
   frameRate(40);
-  personagem = new Personagem(imagemPersonagem);
+  
+  gerenciador = new Gerenciador('Iniciar', width / 2, height / 2);
+  telaInicial = new TelaInicial();
+  jogo = new Jogo();
+  jogo.setup();
 
-  somDoJogo.loop();
+  cenas = {
+    jogo,
+    telaInicial
+  };
+  // somDoJogo.loop();
+}
 
+function keyPressed() {
+  jogo.keyPressed(key);
 }
 
 function draw() {
-  cenario.exibe();
-  cenario.move();
-  
-  personagem.exibe();
+  cenas[cenaAtual].draw();
 }
