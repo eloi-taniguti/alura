@@ -13,7 +13,8 @@ function setup() {
     jogo,
     telaInicial
   };
-  // somDoJogo.loop();
+
+  somDoJogo.loop();
 }
 
 function keyPressed() {
